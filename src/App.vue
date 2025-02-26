@@ -3,10 +3,10 @@
       <!-- Setup Screen -->
       <div v-if="!isGameStarted" class="h-full w-full flex flex-col">
         <!-- <h1 class="text-6xl font-bold text-center py-4 text-white">Chess Clock</h1> -->
-        
+
         <div class="flex-1 flex">
           <!-- Player 1 Setup -->
-          <div 
+          <div
             class="flex-1 flex flex-col items-center justify-center p-4 cursor-pointer font-chivo-mono"
             :class="[
             //   whiteSide === 'player1' ? 'bg-white/20' : 'bg-gray-800/50',
@@ -20,12 +20,12 @@
             >
               {{ whiteSide === 'player1' ? '&#9818' : '&#9812' }}
             </div>
-  
+
             <!-- Time Spinner -->
             <div class="flex items-center space-x-4 mt-12">
               <!-- Hours -->
               <div class="flex flex-col items-center">
-                <button 
+                <button
                   @click.stop="adjustTime('player1', 'hours', 1)"
                   class="p-4 text-white hover:bg-white/10 rounded-lg"
                 >
@@ -36,7 +36,7 @@
                 <div class="text-8xl text-white my-2">
                   {{ Math.floor(player1Time / 60).toString().padStart(2, '0') }}
                 </div>
-                <button 
+                <button
                   @click.stop="adjustTime('player1', 'hours', -1)"
                   class="p-4 text-white hover:bg-white/10 rounded-lg"
                 >
@@ -45,12 +45,12 @@
                   </svg>
                 </button>
               </div>
-  
+
               <div class="text-8xl text-white">:</div>
-  
+
               <!-- Minutes -->
               <div class="flex flex-col items-center">
-                <button 
+                <button
                   @click.stop="adjustTime('player1', 'minutes', 1)"
                   class="p-4 text-white hover:bg-white/10 rounded-lg"
                 >
@@ -61,7 +61,7 @@
                 <div class="text-8xl text-white my-2">
                   {{ (player1Time % 60).toString().padStart(2, '0') }}
                 </div>
-                <button 
+                <button
                   @click.stop="adjustTime('player1', 'minutes', -1)"
                   class="p-4 text-white hover:bg-white/10 rounded-lg"
                 >
@@ -72,9 +72,9 @@
               </div>
             </div>
           </div>
-  
+
           <!-- Player 2 Setup -->
-          <div 
+          <div
             class="flex-1 flex flex-col items-center justify-center p-4 cursor-pointer font-chivo-mono"
             :class="[
             //   whiteSide === 'player2' ? 'bg-white/20' : 'bg-gray-800/50',
@@ -88,12 +88,12 @@
             >
               {{ whiteSide === 'player2' ? '&#9818' : '&#9812' }}
             </div>
-  
+
             <!-- Time Spinner -->
             <div class="flex items-center space-x-4 mt-12">
               <!-- Hours -->
               <div class="flex flex-col items-center">
-                <button 
+                <button
                   @click.stop="adjustTime('player2', 'hours', 1)"
                   class="p-4 text-white hover:bg-white/10 rounded-lg"
                 >
@@ -104,7 +104,7 @@
                 <div class="text-8xl text-white my-2">
                   {{ Math.floor(player2Time / 60).toString().padStart(2, '0') }}
                 </div>
-                <button 
+                <button
                   @click.stop="adjustTime('player2', 'hours', -1)"
                   class="p-4 text-white hover:bg-white/10 rounded-lg"
                 >
@@ -113,12 +113,12 @@
                   </svg>
                 </button>
               </div>
-  
+
               <div class="text-8xl text-white">:</div>
-  
+
               <!-- Minutes -->
               <div class="flex flex-col items-center">
-                <button 
+                <button
                   @click.stop="adjustTime('player2', 'minutes', 1)"
                   class="p-4 text-white hover:bg-white/10 rounded-lg"
                 >
@@ -129,7 +129,7 @@
                 <div class="text-8xl text-white my-2">
                   {{ (player2Time % 60).toString().padStart(2, '0') }}
                 </div>
-                <button 
+                <button
                   @click.stop="adjustTime('player2', 'minutes', -1)"
                   class="p-4 text-white hover:bg-white/10 rounded-lg"
                 >
@@ -141,7 +141,7 @@
             </div>
           </div>
         </div>
-  
+
         <!-- Start Button -->
         <div class="p-3 items-center justify-center flex">
           <button
@@ -150,28 +150,28 @@
           &#9667;
           </button>
           <button
-            @click="startGame" 
+            @click="startGame"
             class="w-96 bg-blue-700 text-white rounded-lg px-4 py-3 text-lg font-semibold mx-2"
           >
             &#9658;
           </button>
-          <button 
+          <button
             class="w-48 bg-gray-700 text-white rounded-lg px-4 py-3 text-lg font-semibold mx-2"
           >
           &#9657;
           </button>
         </div>
       </div>
-  
+
       <!-- Game Screen -->
     <div v-else class="h-screen w-screen flex flex-row">
       <!-- Player 1 Clock -->
-      <button 
+      <button
         @click="toggleClock('player1')"
         :class="[
           'flex-1 flex items-center justify-center p-4 transition-all duration-300 font-chivo-mono',
-          activePlayer === 'player1' 
-            ? 'bg-gray-700' 
+          activePlayer === 'player1'
+            ? 'bg-gray-700'
             : 'bg-black',
           !isRunning ? 'cursor-not-allowed opacity-30' : ''
         ]"
@@ -189,14 +189,14 @@
 
       <!-- Center Controls -->
       <div class="flex flex-col justify-center items-center space-y-4 bg-gray-900 p-4 w-32">
-        <button 
-          @click="togglePause" 
+        <button
+          @click="togglePause"
           class="w-full bg-gray-500 text-white rounded-lg px-2 py-3 text-sm font-semibold"
         >
           {{ isRunning ? '&#9616;&#9616;' : '&#9658' }}
         </button>
-        <button 
-          @click="resetGame" 
+        <button
+          @click="resetGame"
           class="w-full bg-red-500 text-white rounded-lg px-2 py-3 text-sm font-semibold hover:bg-red-600"
         >
           &#8635;
@@ -204,12 +204,12 @@
       </div>
 
       <!-- Player 2 Clock -->
-      <button 
+      <button
         @click="toggleClock('player2')"
         :class="[
           'flex-1 flex items-center justify-center p-4 transition-all duration-300 font-chivo-mono',
-          activePlayer === 'player2' 
-            ? 'bg-gray-700' 
+          activePlayer === 'player2'
+            ? 'bg-gray-700'
             : 'bg-black',
           !isRunning ? 'cursor-not-allowed opacity-30' : ''
         ]"
@@ -227,7 +227,7 @@
     </div>
   </div>
   </template>
-  
+
 <script lang="ts">
 import { defineComponent, ref, onUnmounted } from 'vue'
 
@@ -280,7 +280,7 @@ export default defineComponent({
 
     const adjustTime = (player: Player, unit: 'hours' | 'minutes', change: number) => {
       const timeRef = player === 'player1' ? player1Time : player2Time
-      
+
       if (unit === 'hours') {
         const newHours = Math.floor(timeRef.value / 60) + change
         if (newHours >= 0 && newHours <= 9) {
@@ -289,10 +289,10 @@ export default defineComponent({
       } else {
         const currentHours = Math.floor(timeRef.value / 60)
         let newMinutes = (timeRef.value % 60) + change
-        
+
         if (newMinutes < 0) newMinutes = 59
         if (newMinutes > 59) newMinutes = 0
-        
+
         timeRef.value = (currentHours * 60) + newMinutes
       }
     }

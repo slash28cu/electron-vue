@@ -3,16 +3,24 @@ const path = require("path");
 
 function createWindow() {
   const win = new BrowserWindow({
+    fullscreen: true,
     width: 800,
+    height: 480,
     minWidth: 800,
-    height: 600,
-    minHeight: 600,
+    minHeight: 480,
+    maxWidth: 1024,
+    maxHeight: 576,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
   });
 
-  win.loadFile("dist/index.html");
+  if (!app.isPackaged) {
+    win.loadURL(`http://localhost:9000`);
+    win.webContents.openDevTools({mode: 'undocked'});
+  } else {
+      win.loadFile("dist/index.html");
+  }
 }
 
 app.whenReady().then(() => {
